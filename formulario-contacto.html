@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto — Lumera Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f6;
+      --paper: #ffffff;
+      --ink: #1a1814;
+      --ink-soft: #6b6560;
+      --ink-faint: #c2bdb6;
+      --accent: #d4601a;
+      --accent-light: rgba(212,96,26,0.08);
+      --accent-mid: rgba(212,96,26,0.15);
+      --success: #2a7a4b;
+      --success-bg: rgba(42,122,75,0.07);
+      --error: #c0392b;
+      --error-bg: rgba(192,57,43,0.06);
+      --border: #e4dfd8;
+      --radius: 8px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      padding: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* LEFT PANEL */
+    .left {
+      background: var(--ink);
+      color: #faf9f6;
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,96,26,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .left::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,96,26,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .left-body { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 3rem 0; }
+
+    .tag {
+      display: inline-block;
+      background: rgba(212,96,26,0.15);
+      color: #f0a06a;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      width: fit-content;
+    }
+
+    .left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .left h2 em {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .left p {
+      color: rgba(250,249,246,0.55);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: rgba(250,249,246,0.7);
+    }
+
+    .contact-list .ic {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: rgba(250,249,246,0.5);
+    }
+
+    .contact-list .ic svg { width: 15px; height: 15px; }
+
+    .ssl-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: rgba(250,249,246,0.35);
+    }
+
+    .ssl-note svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* RIGHT PANEL */
+    .right {
+      background: var(--paper);
+      padding: 3.5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .form-header { margin-bottom: 2rem; }
+
+    .form-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-header p {
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+    }
+
+    .field { margin-bottom: 1.2rem; }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 0.45rem;
+      transition: color 0.2s;
+    }
+
+    .required-star { color: var(--accent); margin-left: 2px; }
+
+    .field:focus-within > label { color: var(--accent); }
+
+    .input-wrap { position: relative; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.72rem 2.6rem 0.72rem 0.95rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.93rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+
+    select {
+      padding-right: 2.6rem;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%236b6560' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+      padding-right: 0.95rem;
+      line-height: 1.55;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(212,96,26,0.08);
+    }
+
+    input.valid   { border-color: var(--success); background: var(--success-bg); }
+    input.invalid { border-color: var(--error);   background: var(--error-bg); }
+    select.valid  { border-color: var(--success); background: var(--success-bg); }
+    select.invalid{ border-color: var(--error);   background: var(--error-bg); }
+    textarea.valid  { border-color: var(--success); background: var(--success-bg); }
+    textarea.invalid{ border-color: var(--error);   background: var(--error-bg); }
+
+    .status-icon {
+      position: absolute;
+      right: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px; height: 15px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    .status-icon.ta { top: 1.1rem; transform: none; }
+
+    .field.valid   .status-icon.ok  { opacity: 1; color: var(--success); }
+    .field.invalid .status-icon.err { opacity: 1; color: var(--error); }
+
+    .hint {
+      font-size: 0.77rem;
+      margin-top: 0.35rem;
+      min-height: 1.1em;
+      color: var(--ink-faint);
+      transition: color 0.2s;
+    }
+
+    .hint.error   { color: var(--error); }
+    .hint.success { color: var(--success); }
+
+    .form-row { display: flex; gap: 1rem; }
+    .form-row .field { flex: 1; }
+
+    .char-count {
+      font-size: 0.73rem;
+      color: var(--ink-faint);
+      text-align: right;
+      margin-top: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .char-count.warn { color: var(--accent); }
+
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .checkbox-field input[type="checkbox"] {
+      width: 17px; height: 17px;
+      accent-color: var(--accent);
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-field label {
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink-soft);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .checkbox-field label a { color: var(--accent); text-decoration: none; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.88rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-submit:hover {
+      background: #b84f10;
+      box-shadow: 0 6px 20px rgba(212,96,26,0.22);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    /* CONFIRMATION */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+      animation: fadeIn 0.5s ease both;
+    }
+
+    .confirmation.show { display: flex; flex-direction: column; align-items: center; }
+
+    .confirm-ring {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--success-bg);
+      border: 2px solid rgba(42,122,75,0.25);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .confirm-ring svg { width: 32px; height: 32px; color: var(--success); }
+
+    .confirm-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .confirm-msg {
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 360px;
+    }
+
+    .timeline {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      text-align: left;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .tl-item:last-child { border-bottom: none; }
+
+    .tl-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .tl-text {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .tl-text strong { color: var(--ink); font-weight: 500; }
+
+    .btn-back {
+      margin-top: 1.5rem;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1.5rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .left {
+        padding: 2.5rem 1.75rem;
+        min-height: auto;
+      }
+      .left-body { padding: 2rem 0 1.5rem; }
+      .left h2 { font-size: 2rem; }
+      .right { padding: 2.5rem 1.75rem; }
+      .form-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- LEFT -->
+  <div class="left">
+    <div class="logo">
+      <div class="logo-mark">L</div>
+      Lumera Studio
+    </div>
+
+    <div class="left-body">
+      <span class="tag">Soporte 24 / 7</span>
+      <h2>Hablemos.<br/>Estamos <em>aquí</em> para ti.</h2>
+      <p>¿Tienes dudas, proyectos o simplemente quieres saludar? Completa el formulario y te responderemos en menos de 24 horas.</p>
+
+      <ul class="contact-list">
+        <li>
+          <div class="ic">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="1" y="3" width="14" height="10" rx="2"/>
+              <path d="M1 5l7 5 7-5"/>
+            </svg>
+          </div>
+          hola@lumerastudio.mx
+        </li>
+        <li>
+          <div class="ic">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M2 2h4l1.5 4-2 1.5a9 9 0 004 4L11 9.5l4 1.5v4a1 1 0 01-1 1C6 16 0 10 0 3a1 1 0 011-1h1z"/>
+            </svg>
+          </div>
+          +52 (722) 000-1234
+        </li>
+        <li>
+          <div class="ic">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M8 1C5.2 1 3 3.2 3 6c0 4 5 9 5 9s5-5 5-9c0-2.8-2.2-5-5-5zm0 6.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3z"/>
+            </svg>
+          </div>
+          Toluca, Estado de México
+        </li>
+      </ul>
+    </div>
+
+    <div class="ssl-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6">
+        <rect x="2" y="7" width="12" height="8" rx="2"/>
+        <path d="M5 7V5a3 3 0 016 0v2"/>
+      </svg>
+      Formulario protegido con cifrado SSL — tus datos están seguros.
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+
+    <!-- FORM -->
+    <div id="form-section">
+      <div class="form-header">
+        <h3>Envíanos un mensaje</h3>
+        <p>Los campos con <span style="color:var(--accent)">*</span> son obligatorios.</p>
+      </div>
+
+      <form id="contact-form" novalidate>
+
+        <div class="form-row">
+          <div class="field" id="f-nombre">
+            <label for="nombre">Nombre <span class="required-star">*</span></label>
+            <div class="input-wrap">
+              <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name"/>
+              <svg class="status-icon ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              <svg class="status-icon err" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+            </div>
+            <p class="hint" id="hint-nombre"></p>
+          </div>
+
+          <div class="field" id="f-apellido">
+            <label for="apellido">Apellido <span class="required-star">*</span></label>
+            <div class="input-wrap">
+              <input type="text" id="apellido" placeholder="Tu apellido" autocomplete="family-name"/>
+              <svg class="status-icon ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              <svg class="status-icon err" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+            </div>
+            <p class="hint" id="hint-apellido"></p>
+          </div>
+        </div>
+
+        <div class="field" id="f-email">
+          <label for="email">Correo electrónico <span class="required-star">*</span></label>
+          <div class="input-wrap">
+            <input type="email" id="email" placeholder="tu@correo.com" autocomplete="email"/>
+            <svg class="status-icon ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+            <svg class="status-icon err" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          </div>
+          <p class="hint" id="hint-email"></p>
+        </div>
+
+        <div class="form-row">
+          <div class="field" id="f-tel">
+            <label for="tel">Teléfono</label>
+            <div class="input-wrap">
+              <input type="tel" id="tel" placeholder="Ej. 7221234567" autocomplete="tel" maxlength="15"/>
+              <svg class="status-icon ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              <svg class="status-icon err" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+            </div>
+            <p class="hint" id="hint-tel">Opcional — solo dígitos, sin espacios.</p>
+          </div>
+
+          <div class="field" id="f-asunto">
+            <label for="asunto">Asunto <span class="required-star">*</span></label>
+            <div class="input-wrap">
+              <select id="asunto">
+                <option value="">Selecciona una opción…</option>
+                <option value="cotizacion">Cotización de proyecto</option>
+                <option value="soporte">Soporte técnico</option>
+                <option value="colaboracion">Colaboración</option>
+                <option value="otro">Otro</option>
+              </select>
+              <svg class="status-icon ok" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+              <svg class="status-icon err" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+            </div>
+            <p class="hint" id="hint-asunto"></p>
+          </div>
+        </div>
+
+        <div class="field" id="f-mensaje">
+          <label for="mensaje">Mensaje <span class="required-star">*</span></label>
+          <div class="input-wrap">
+            <textarea id="mensaje" placeholder="Cuéntanos cómo podemos ayudarte. Sé tan detallado como necesites…" maxlength="500"></textarea>
+            <svg class="status-icon ok ta" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+            <svg class="status-icon err ta" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.3rem;">
+            <p class="hint" id="hint-mensaje"></p>
+            <p class="char-count" id="char-count">0 / 500</p>
+          </div>
+        </div>
+
+        <div class="checkbox-field">
+          <input type="checkbox" id="privacy"/>
+          <label for="privacy">
+            He leído y acepto el <a href="#">Aviso de Privacidad</a>. Entiendo que
+            mis datos están protegidos con cifrado SSL y no serán compartidos con terceros.
+          </label>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-enviar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2L8 14l-2-5-5-2 13-5z" stroke-linejoin="round"/>
+          </svg>
+          Enviar mensaje
+        </button>
+
+      </form>
+    </div>
+
+    <!-- CONFIRMACIÓN -->
+    <div class="confirmation" id="confirmation">
+      <div class="confirm-ring">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M6 16l7 7L26 9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="confirm-title">¡Mensaje enviado!</h2>
+      <p class="confirm-msg">
+        Recibimos tu mensaje correctamente. Nuestro equipo lo revisará y te contactaremos a la brevedad.
+        Tus datos viajaron cifrados con SSL en todo momento.
+      </p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <p class="tl-text"><strong>Ahora</strong> — Tu mensaje llegó a nuestro equipo de soporte.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ink-faint)"></div>
+          <p class="tl-text"><strong>En las próximas horas</strong> — Revisaremos tu solicitud y la asignaremos al área correcta.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--ink-faint)"></div>
+          <p class="tl-text"><strong>Antes de 24 h</strong> — Recibirás una respuesta en el correo que nos proporcionaste.</p>
+        </div>
+      </div>
+
+      <button class="btn-back" onclick="resetForm()">← Enviar otro mensaje</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const fields = {
+    nombre:   { el: document.getElementById('nombre'),   hint: document.getElementById('hint-nombre'),   wrap: document.getElementById('f-nombre') },
+    apellido: { el: document.getElementById('apellido'), hint: document.getElementById('hint-apellido'), wrap: document.getElementById('f-apellido') },
+    email:    { el: document.getElementById('email'),    hint: document.getElementById('hint-email'),    wrap: document.getElementById('f-email') },
+    tel:      { el: document.getElementById('tel'),      hint: document.getElementById('hint-tel'),      wrap: document.getElementById('f-tel') },
+    asunto:   { el: document.getElementById('asunto'),   hint: document.getElementById('hint-asunto'),   wrap: document.getElementById('f-asunto') },
+    mensaje:  { el: document.getElementById('mensaje'),  hint: document.getElementById('hint-mensaje'),  wrap: document.getElementById('f-mensaje') },
+  };
+
+  function setFieldState(name, state, msg) {
+    const f = fields[name];
+    f.wrap.classList.remove('valid','invalid');
+    f.el.classList.remove('valid','invalid');
+    f.hint.className = 'hint';
+    if (state) {
+      f.wrap.classList.add(state);
+      f.el.classList.add(state);
+      f.hint.classList.add(state === 'valid' ? 'success' : 'error');
+    }
+    if (msg !== undefined) f.hint.textContent = msg;
+  }
+
+  function validateNombre() {
+    const v = fields.nombre.el.value.trim();
+    if (!v) return setFieldState('nombre', 'invalid', 'El nombre es obligatorio.');
+    if (v.length < 2) return setFieldState('nombre', 'invalid', 'Mínimo 2 caracteres.');
+    setFieldState('nombre', 'valid', '');
+  }
+
+  function validateApellido() {
+    const v = fields.apellido.el.value.trim();
+    if (!v) return setFieldState('apellido', 'invalid', 'El apellido es obligatorio.');
+    if (v.length < 2) return setFieldState('apellido', 'invalid', 'Mínimo 2 caracteres.');
+    setFieldState('apellido', 'valid', '');
+  }
+
+  function validateEmail() {
+    const v = fields.email.el.value.trim();
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!v) return setFieldState('email', 'invalid', 'El correo es obligatorio.');
+    if (!re.test(v)) return setFieldState('email', 'invalid', 'Escribe un correo válido, ej. tu@correo.com');
+    setFieldState('email', 'valid', 'Correo válido ✓');
+  }
+
+  function validateTel() {
+    const v = fields.tel.el.value.trim();
+    if (!v) { setFieldState('tel', null, 'Opcional — solo dígitos, sin espacios.'); return; }
+    if (!/^\d{7,15}$/.test(v)) return setFieldState('tel', 'invalid', 'Solo dígitos, entre 7 y 15 caracteres.');
+    setFieldState('tel', 'valid', 'Teléfono válido ✓');
+  }
+
+  function validateAsunto() {
+    const v = fields.asunto.el.value;
+    if (!v) return setFieldState('asunto', 'invalid', 'Selecciona un asunto.');
+    setFieldState('asunto', 'valid', '');
+  }
+
+  function validateMensaje() {
+    const v = fields.mensaje.el.value.trim();
+    if (!v) return setFieldState('mensaje', 'invalid', 'El mensaje es obligatorio.');
+    if (v.length < 15) return setFieldState('mensaje', 'invalid', `Mínimo 15 caracteres (${v.length} escritos).`);
+    setFieldState('mensaje', 'valid', '');
+  }
+
+  // Char counter
+  fields.mensaje.el.addEventListener('input', function() {
+    const len = this.value.length;
+    const cc = document.getElementById('char-count');
+    cc.textContent = `${len} / 500`;
+    cc.className = 'char-count' + (len > 450 ? ' warn' : '');
+    validateMensaje();
+  });
+
+  // Live validation
+  fields.nombre.el.addEventListener('input', validateNombre);
+  fields.apellido.el.addEventListener('input', validateApellido);
+  fields.email.el.addEventListener('input', validateEmail);
+  fields.tel.el.addEventListener('input', validateTel);
+  fields.asunto.el.addEventListener('change', validateAsunto);
+
+  // Submit
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    validateNombre(); validateApellido(); validateEmail(); validateTel(); validateAsunto(); validateMensaje();
+
+    const required = ['nombre','apellido','email','asunto','mensaje'];
+    const allValid = required.every(n => fields[n].wrap.classList.contains('valid'));
+
+    if (!document.getElementById('privacy').checked) {
+      alert('Debes aceptar el Aviso de Privacidad para enviar el formulario.');
+      return;
+    }
+    if (!allValid) return;
+
+    document.getElementById('form-section').style.display = 'none';
+    document.getElementById('confirmation').classList.add('show');
+  });
+
+  function resetForm() {
+    document.getElementById('contact-form').reset();
+    Object.keys(fields).forEach(n => {
+      fields[n].wrap.classList.remove('valid','invalid');
+      fields[n].el.classList.remove('valid','invalid');
+      fields[n].hint.className = 'hint';
+      if (n === 'tel') fields[n].hint.textContent = 'Opcional — solo dígitos, sin espacios.';
+      else fields[n].hint.textContent = '';
+    });
+    document.getElementById('char-count').textContent = '0 / 500';
+    document.getElementById('confirmation').classList.remove('show');
+    document.getElementById('form-section').style.display = '';
+  }
+</script>
+</body>
+</html>
